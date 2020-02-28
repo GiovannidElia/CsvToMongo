@@ -11,6 +11,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 import com.upload.filedemo.config.SpringMongoConfig;
 import com.upload.filedemo.exception.FileStorageException;
 import com.upload.filedemo.exception.MyFileNotFoundException;
+import com.upload.filedemo.model.Book;
 import com.upload.filedemo.property.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -24,12 +25,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 
 @Service
 public class FileStorageService {
@@ -43,12 +48,25 @@ public class FileStorageService {
 
         try {
             Files.createDirectories(this.fileStorageLocation);
+
+            Book book = new Book();
+            book.setId(1L);
+            book.setName("Book1");
+            book.setAuthor("Author1");
+            book.setDate(new Date());
+
+            JAXBContext context = JAXBContext.newInstance(Book.class);
+            Marshaller mar= context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(book, new File("./book.xml"));
+
+
         } catch (Exception ex) {
             throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    public String storeFile(MultipartFile file)  {
 
         ApplicationContext ctx =
                 new AnnotationConfigApplicationContext(SpringMongoConfig.class);

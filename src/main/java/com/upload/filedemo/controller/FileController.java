@@ -36,9 +36,6 @@ public class FileController {
             String content = new String(file.getBytes());
             System.out.println(content);
 
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,10 +51,10 @@ public class FileController {
 
     @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
+            return Arrays.asList(files)
+                    .stream()
+                    .map(file -> uploadFile(file))
+                    .collect(Collectors.toList());
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")

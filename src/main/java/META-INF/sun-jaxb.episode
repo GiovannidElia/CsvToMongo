@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2020.02.28 alle 11:27:50 AM CET 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="/jaxb/gen">
+    <schemaBindings map="false">
+      <package name="jaxb.gen"/>
+    </schemaBindings>
+    <bindings scd="~tns:UserRequest">
+      <class ref="jaxb.gen.UserRequest"/>
+    </bindings>
+    <bindings scd="~tns:UserResponse">
+      <class ref="jaxb.gen.UserResponse"/>
+    </bindings>
+  </bindings>
+</bindings>
+
